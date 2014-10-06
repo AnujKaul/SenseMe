@@ -40,17 +40,27 @@ public class SenseLessActivity extends Activity implements SensorEventListener{
     public void onSensorChanged(SensorEvent sEvent){
         //detects use of sensor in a particular setting
         if (sEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-            getAccelometer(sEvent);
+            getAccelerometer(sEvent);
+        }
+        if (sEvent.sensor.getType() == Sensor.TYPE_STEP_DETECTOR){
+            getStepCount(sEvent);
         }
 
     }
+
+    private void getStepCount(SensorEvent se){
+
+    }
+
+
     //registers accelometer event do stuff here for accelometer settings
-    private void getAccelometer(SensorEvent sEvent){
+    private void getAccelerometer(SensorEvent sEvent){
         float[] accelValues =  sEvent.values;
 
         float x = accelValues[0];
         float y = accelValues[1];
         float z = accelValues[2];
+
 
         float accelSqRoot = (x*x + y*y + z*z) / (SensorManager.GRAVITY_EARTH * SensorManager.GRAVITY_EARTH);
 
@@ -62,13 +72,13 @@ public class SenseLessActivity extends Activity implements SensorEventListener{
             }
             lastUpdate =actualTime;
 
-            Toast.makeText(this, "Shaking your Booty!", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Shaking your Booty!", Toast.LENGTH_SHORT).show();
 
             Random rand = new Random();
 
-            int r = rand.nextInt(255) + 0;
-            int g = rand.nextInt(255) + 0;
-            int b = rand.nextInt(255) + 0;
+            int r = rand.nextInt(255);
+            int g = rand.nextInt(255);
+            int b = rand.nextInt(255);
 
             System.out.println("Values  = > " + r + " " + g+ " " + b);
 
